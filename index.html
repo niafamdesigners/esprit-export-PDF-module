@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>آموزش تبدیل HTML به PDF</title>
+    <!-- فونت ایران‌سنس -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vazir-font/30.1.0/font-face.min.css" rel="stylesheet" />
+    <style>
+      * {
+        font-family: Vazir, Tahoma, sans-serif;
+      }
+
+      body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+
+      #content {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #eee;
+      }
+
+      h1 {
+        color: #2c3e50;
+        font-size: 24px;
+      }
+
+      h2 {
+        color: #34495e;
+        font-size: 20px;
+        margin-top: 25px;
+      }
+
+      p {
+        line-height: 1.8;
+        color: #444;
+      }
+
+      .code-block {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        direction: ltr;
+        text-align: left;
+        font-family: monospace;
+        margin: 15px 0;
+      }
+
+      button {
+        display: block;
+        margin: 30px auto;
+        padding: 12px 24px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+      }
+
+      .example {
+        background: #fff8dc;
+        padding: 15px;
+        border-right: 4px solid #ffd700;
+        margin: 20px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: right;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      .note {
+        background-color: #e1f5fe;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="generatePDF()">دانلود PDF</button>
+
+    <div id="content">
+      <div class="header">
+        <h1>تبدیل HTML به PDF با استفاده از jsPDF</h1>
+        <p>یک راهنمای ساده و کاربردی</p>
+      </div>
+
+      <h2>معرفی</h2>
+      <p>کتابخانه jsPDF یکی از بهترین ابزارها برای تبدیل صفحات وب به PDF است. در این آموزش، نحوه استفاده از این کتابخانه را با یک مثال عملی یاد می‌گیریم.</p>
+
+      <div class="note"><strong>نکته مهم:</strong> این صفحه یک نمونه عملی است - با کلیک روی دکمه "دانلود PDF" می‌توانید خروجی PDF این صفحه را ببینید.</div>
+
+      <h2>جدول نمونه</h2>
+      <table>
+        <tr>
+          <th>ویژگی</th>
+          <th>توضیحات</th>
+        </tr>
+        <tr>
+          <td>پشتیبانی از RTL</td>
+          <td>نمایش صحیح متون راست به چپ</td>
+        </tr>
+        <tr>
+          <td>فونت فارسی</td>
+          <td>استفاده از فونت‌های فارسی در PDF</td>
+        </tr>
+        <tr>
+          <td>جداول</td>
+          <td>پشتیبانی از ساختارهای جدول</td>
+        </tr>
+      </table>
+
+      <h2>نمونه کد</h2>
+      <div class="code-block">
+        // تبدیل HTML به PDF
+        <br />
+        // این کد صرفا یک مثال است
+        <br />
+        const doc = new jsPDF(); const myFont = ... // load the *.ttf font file as binary string // add the font to jsPDF doc.addFileToVFS("MyFont.ttf", myFont); doc.addFont("MyFont.ttf", "MyFont",
+        "normal"); doc.setFont("MyFont");
+      </div>
+
+      <div class="example">
+        <h3>مزایای استفاده از jsPDF:</h3>
+        <ul>
+          <li>سادگی در استفاده</li>
+          <li>پشتیبانی از فونت‌های فارسی</li>
+          <li>قابلیت شخصی‌سازی بالا</li>
+          <li>عملکرد سریع و بهینه</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- کتابخانه‌های مورد نیاز -->
+    <script src="jspdf.umd.min.js"></script>
+    <script src="html2canvas.min.js"></script>
+
+    <script>
+      function generatePDF() {
+        // نمایش پیام در حال پردازش
+        const loadingDiv = document.createElement("div");
+        loadingDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(255, 255, 255, 0.9);
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.2);
+                z-index: 9999;
+            `;
+        loadingDiv.textContent = "در حال ساخت PDF...";
+        document.body.appendChild(loadingDiv);
+
+        // گرفتن المان محتوا
+        const element = document.querySelector("#content");
+
+        // تنظیمات html2canvas
+        const options = {
+          scale: 2,
+          useCORS: true,
+          logging: true,
+          backgroundColor: "#ffffff",
+        };
+
+        // تبدیل به PDF
+        html2canvas(element, options).then((canvas) => {
+          const { jsPDF } = window.jspdf;
+
+          // ایجاد PDF با اندازه A4
+          const pdf = new jsPDF("p", "mm", "a4");
+
+          // تبدیل canvas به تصویر
+          const imgData = canvas.toDataURL("image/jpeg", 1.0);
+
+          // محاسبه ابعاد
+          const pageWidth = pdf.internal.pageSize.getWidth();
+          const pageHeight = pdf.internal.pageSize.getHeight();
+          const imgWidth = pageWidth;
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+          let heightLeft = imgHeight;
+          let position = 0;
+
+          // صفحه اول
+          pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+
+          // اضافه کردن صفحات بعدی اگر نیاز باشد
+          while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+          }
+
+          // ذخیره PDF
+          pdf.save("tutorial.pdf");
+
+          // حذف پیام loading
+          document.body.removeChild(loadingDiv);
+        });
+      }
+    </script>
+  </body>
+</html>
